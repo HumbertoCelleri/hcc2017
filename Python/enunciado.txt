@@ -1,0 +1,11 @@
+Se tiene un horno de secado de pintura, en dónde la calidad del secado es en función de la estabilidad de la temperatura, por lo que es necesario saber cuan estable es.
+
+Para ello se instalan varios sensores en el horno, conectados a un dispositivo que nos generará un archivo de texto con los valores de esos sensores, tomados uno por segundo.
+
+El formato del archivo es de una medición por linea, con la primer columna siendo el timestamp (en segundos), y el resto de las columnas la información de los sensores. Las columnas están separadas por espacios.
+
+A partir de cada archivo con datos de los sensores, tenemos que detectar en qué momentos en qué sensores hubieron variaciones que afectan la calidad de la pintura.
+
+Para ello se deberá hacer un programa que reciba por linea de comandos un archivo a procesar, y analice los datos de cada sensor por separado. Para cada sensor se deberá calcular el promedio y la desviación estándar, y luego indicar qué valores tienen una diferencia con el promedio más grande que tres sigma (y a qué hora se sucedieron).
+
+Se proveen dos archivos (samples enteros y un test reducido), junto con las salidas que hay que emular.
