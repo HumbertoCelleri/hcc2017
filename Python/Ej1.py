@@ -12,7 +12,6 @@ Ej1 Python
 """
 
 import numpy as np
-import sys
 import argparse
 
 class oven_temperature:    
@@ -83,6 +82,24 @@ class oven_temperature:
         for i in self.out_of_3stddev:
             print(i)
             
+    def display_results_sensor(self):
+        """
+        Display results: each sensor at a time
+        """
+        
+        print("Los valores que se encontraron fuera de 3 desviaciones estandar son:")
+        for j in range(1,len(self.out_of_3stddev[0])): # Recorre sensores
+            print("Sensor: "+str(j))
+            result_sensor = []
+            # Recorre tiempos
+            [(result_sensor.append(i[[0,j]]))for (i) in (self.data[:,0:4]) if (
+                (i[j] > 3*self.stddev[j-1]+self.prom[j-1])|
+                (i[j] < -3*self.stddev[j-1]+self.prom[j-1])
+                )]
+                
+            for p1 in result_sensor: # Show on screen
+                print(p1)
+            
 
 if __name__ == "__main__":
     """
@@ -98,12 +115,15 @@ if __name__ == "__main__":
                     help='str: A file name of the .txt containing tme and temperatures')
     # Guardamos las variables pasadas por comando
     args = parser.parse_args()
-
+    
     # COMPUTE
     temperature_today = oven_temperature(args.file_name[0]) 
-    
+#    temperature_today = oven_temperature("samples.txt")
     temperature_today.compute_analysis()
     
     temperature_today.display_results()
+    
+    print("Pero si queremos ver sensor a sensor:")
+    temperature_today.display_results_sensor()
     
     print("DONE!")
